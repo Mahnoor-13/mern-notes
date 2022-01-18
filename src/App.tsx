@@ -1,24 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Note from './components/Note/Note';
+// import axios from "axios"
+import DUMMY_NOTES from './DUMMY_NOTES';
 
 function App() {
+  const [notesList, setNotesList] = useState<any[]>([])
+
+  useEffect(() => {
+    setNotesList(DUMMY_NOTES)
+
+  }, [])
+
+  // const getNotes = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       'http://localhost:5000/notes'
+  //     )
+  //     setNotesList(response.data.notes)
+  //     console.log(notesList);
+  //   } catch (error) {
+  //     console.error(error);
+
+  //   }
+  // }
+  console.log(notesList);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>Notes Application </div>
+      <div className="notes-list">
+        {
+          notesList.map((noteItem, index) => {
+            return (
+              <Note note={noteItem} key={index} />)
+          })
+        }
+      </div>
     </div>
   );
 }
